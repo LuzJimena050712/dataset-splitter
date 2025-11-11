@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Splitter - División de Datasets ARFF</title>
+    <link rel="stylesheet" href="{% static 'splitter/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>División del DataSet</h1>
+        <p class="subtitle">Entrenamiento, validación y prueba</p>
+        
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <input type="file" id="fileInput" accept=".arff">
+            <label for="fileInput" class="file-label">Seleccionar archivo</label>
+            <span id="fileName" class="file-name">Sin archivos seleccionados</span>
+        </div>
+
+        <!-- Configuration Section -->
+        <div id="configSection" class="config-section hidden">
+            <h2>Configuración de División</h2>
+            <div class="config-grid">
+                <div class="config-item">
+                    <label for="trainSize">Training Set (%)</label>
+                    <input type="number" id="trainSize" value="60" min="10" max="80" readonly>
+                    <small>Conjunto de entrenamiento</small>
+                </div>
+                <div class="config-item">
+                    <label for="valSize">Validation Set (%)</label>
+                    <input type="number" id="valSize" value="20" min="10" max="40">
+                    <small>Conjunto de validación</small>
+                </div>
+                <div class="config-item">
+                    <label for="testSize">Test Set (%)</label>
+                    <input type="number" id="testSize" value="20" min="10" max="40" readonly>
+                    <small>Conjunto de prueba</small>
+                </div>
+                <div class="config-item">
+                    <label for="randomState">Random State</label>
+                    <input type="number" id="randomState" value="42" min="1">
+                    <small>Semilla aleatoria</small>
+                </div>
+            </div>
+            <button id="processBtn" class="upload-btn">Dividir Dataset</button>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading hidden">Procesando dataset...</div>
+
+        <!-- Error -->
+        <div id="error" class="error hidden"></div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section hidden">
+            <h2>División Completada</h2>
+            
+            <!-- Stats -->
+            <div class="info-section">
+                <p><strong>Dataset Original:</strong> <span id="statOriginal">-</span> registros (100%)</p>
+                <p><strong>Training Set:</strong> <span id="statTrain">-</span> registros (<span id="statTrainPct">-</span>%)</p>
+                <p><strong>Validation Set:</strong> <span id="statVal">-</span> registros (<span id="statValPct">-</span>%)</p>
+                <p><strong>Test Set:</strong> <span id="statTest">-</span> registros (<span id="statTestPct">-</span>%)</p>
+            </div>
+
+            <!-- Plots -->
+            <div class="plots-section">
+                <h2>Distribución de Datos</h2>
+                <div class="plots-grid">
+                    <div class="plot-card">
+                        <h3>Dataset Original</h3>
+                        <img id="plotOriginal" src="" alt="Original Dataset">
+                    </div>
+                    <div class="plot-card">
+                        <h3>Training Set</h3>
+                        <img id="plotTrain" src="" alt="Training Set">
+                    </div>
+                    <div class="plot-card">
+                        <h3>Validation Set</h3>
+                        <img id="plotVal" src="" alt="Validation Set">
+                    </div>
+                    <div class="plot-card">
+                        <h3>Test Set</h3>
+                        <img id="plotTest" src="" alt="Test Set">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="download-section">
+                <button id="downloadBtn" class="upload-btn">Descargar Datasets Divididos</button>
+                <button id="resetBtn" class="secondary-btn">Dividir Otro Dataset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'splitter/js/main.js' %}"></script>
+</body>
+</html>
