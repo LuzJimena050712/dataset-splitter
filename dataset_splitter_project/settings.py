@@ -28,6 +28,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CSRF Settings
+CSRF_TRUSTED_ORIGINS = [
+    'https://dataset-splitter.onrender.com',
+    'https://*.onrender.com',
+]
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SECURE = True
+
 ROOT_URLCONF = 'dataset_splitter_project.urls'
 
 TEMPLATES = [

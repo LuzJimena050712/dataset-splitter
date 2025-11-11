@@ -180,5 +180,14 @@ function getCookie(name) {
             }
         }
     }
+    
+    // Si no hay cookie, intentar obtener del token en el DOM
+    if (!cookieValue) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfToken) {
+            cookieValue = csrfToken.value;
+        }
+    }
+    
     return cookieValue;
 }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'splitter/css/styles.css' %}">
 </head>
 <body>
+    {% csrf_token %}
     <div class="container">
         <h1>División del DataSet</h1>
         <p class="subtitle">Entrenamiento, validación y prueba</p>
