@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="{% static 'splitter/css/styles.css' %}">
 </head>
 <body>
-    {% csrf_token %}
     <div class="container">
         <h1>División del DataSet</h1>
         <p class="subtitle">Entrenamiento, validación y prueba</p>
-        
         <div class="upload-section">
             <input type="file" id="fileInput" accept=".arff">
             <label for="fileInput" class="file-label">Seleccionar archivo</label>
             <span id="fileName" class="file-name">Sin archivos seleccionados</span>
         </div>
-
         <div id="configSection" class="config-section hidden">
             <h2>Configuración de División</h2>
             <div class="config-grid">
@@ -45,28 +42,22 @@
             </div>
             <button id="processBtn" class="upload-btn">Dividir Dataset</button>
         </div>
-
         <div id="loading" class="loading hidden">Procesando dataset...</div>
-
         <div id="error" class="error hidden"></div>
-
         <div id="resultsSection" class="results-section hidden">
-            <h2>✅ División Completada</h2>
-            
+            <h2>División Completada</h2>
             <div class="info-section">
                 <p><strong>Dataset Original:</strong> <span id="statOriginal">-</span> registros (100%)</p>
                 <p><strong>Training Set:</strong> <span id="statTrain">-</span> registros (<span id="statTrainPct">-</span>%)</p>
                 <p><strong>Validation Set:</strong> <span id="statVal">-</span> registros (<span id="statValPct">-</span>%)</p>
                 <p><strong>Test Set:</strong> <span id="statTest">-</span> registros (<span id="statTestPct">-</span>%)</p>
             </div>
-
             <div class="download-section">
-                <button id="downloadBtn" class="upload-btn">⬇️ Descargar Datasets Divididos</button>
-                <button id="resetBtn" class="secondary-btn">🔄 Dividir Otro Dataset</button>
+                <button id="downloadBtn" class="upload-btn" disabled>Descargar Datasets Divididos</button>
+                <button id="resetBtn" class="secondary-btn">Dividir Otro Dataset</button>
             </div>
         </div>
     </div>
-
     <script src="{% static 'splitter/js/main.js' %}"></script>
 </body>
 </html>
