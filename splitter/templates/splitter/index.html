@@ -13,14 +13,12 @@
         <h1>División del DataSet</h1>
         <p class="subtitle">Entrenamiento, validación y prueba</p>
         
-        <!-- Upload Section -->
         <div class="upload-section">
             <input type="file" id="fileInput" accept=".arff">
             <label for="fileInput" class="file-label">Seleccionar archivo</label>
             <span id="fileName" class="file-name">Sin archivos seleccionados</span>
         </div>
 
-        <!-- Configuration Section -->
         <div id="configSection" class="config-section hidden">
             <h2>Configuración de División</h2>
             <div class="config-grid">
@@ -48,17 +46,13 @@
             <button id="processBtn" class="upload-btn">Dividir Dataset</button>
         </div>
 
-        <!-- Loading -->
         <div id="loading" class="loading hidden">Procesando dataset...</div>
 
-        <!-- Error -->
         <div id="error" class="error hidden"></div>
 
-        <!-- Results Section -->
         <div id="resultsSection" class="results-section hidden">
-            <h2>División Completada</h2>
+            <h2>✅ División Completada</h2>
             
-            <!-- Stats -->
             <div class="info-section">
                 <p><strong>Dataset Original:</strong> <span id="statOriginal">-</span> registros (100%)</p>
                 <p><strong>Training Set:</strong> <span id="statTrain">-</span> registros (<span id="statTrainPct">-</span>%)</p>
@@ -66,33 +60,9 @@
                 <p><strong>Test Set:</strong> <span id="statTest">-</span> registros (<span id="statTestPct">-</span>%)</p>
             </div>
 
-            <!-- Plots -->
-            <div class="plots-section">
-                <h2>Distribución de Datos</h2>
-                <div class="plots-grid">
-                    <div class="plot-card">
-                        <h3>Dataset Original</h3>
-                        <img id="plotOriginal" src="" alt="Original Dataset">
-                    </div>
-                    <div class="plot-card">
-                        <h3>Training Set</h3>
-                        <img id="plotTrain" src="" alt="Training Set">
-                    </div>
-                    <div class="plot-card">
-                        <h3>Validation Set</h3>
-                        <img id="plotVal" src="" alt="Validation Set">
-                    </div>
-                    <div class="plot-card">
-                        <h3>Test Set</h3>
-                        <img id="plotTest" src="" alt="Test Set">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Download Buttons -->
             <div class="download-section">
-                <button id="downloadBtn" class="upload-btn">Descargar Datasets Divididos</button>
-                <button id="resetBtn" class="secondary-btn">Dividir Otro Dataset</button>
+                <button id="downloadBtn" class="upload-btn">⬇️ Descargar Datasets Divididos</button>
+                <button id="resetBtn" class="secondary-btn">🔄 Dividir Otro Dataset</button>
             </div>
         </div>
     </div>

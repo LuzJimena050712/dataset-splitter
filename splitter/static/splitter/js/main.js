@@ -10,7 +10,6 @@ const resetBtn = document.getElementById('resetBtn');
 
 let sessionId = null;
 
-// File input change
 fileInput.addEventListener('change', function() {
     if (this.files.length > 0) {
         const file = this.files[0];
@@ -27,7 +26,6 @@ fileInput.addEventListener('change', function() {
     }
 });
 
-// Validation size change
 document.getElementById('valSize').addEventListener('input', function() {
     const valSize = parseInt(this.value);
     const trainSize = 60;
@@ -42,17 +40,14 @@ document.getElementById('valSize').addEventListener('input', function() {
     document.getElementById('testSize').value = testSize;
 });
 
-// Process button
 processBtn.addEventListener('click', processDataset);
 
-// Download button
 downloadBtn.addEventListener('click', function() {
     if (sessionId) {
         window.location.href = `/download/?session_id=${sessionId}`;
     }
 });
 
-// Reset button
 resetBtn.addEventListener('click', function() {
     fileInput.value = '';
     fileName.textContent = 'Sin archivos seleccionados';
@@ -78,16 +73,13 @@ async function processDataset() {
     const formData = new FormData();
     formData.append('file', file);
     
-    // Convert percentages to decimals for backend
     const trainSize = parseInt(document.getElementById('trainSize').value);
     const valSize = parseInt(document.getElementById('valSize').value);
     const testSize = parseInt(document.getElementById('testSize').value);
     
-    // First split: train vs (val+test)
     const tempSize = (valSize + testSize) / 100;
     formData.append('test_size', tempSize.toString());
     
-    // Second split: val vs test (from temp)
     const valFromTemp = valSize / (valSize + testSize);
     formData.append('val_size', valFromTemp.toString());
     
@@ -102,11 +94,9 @@ async function processDataset() {
             }
         });
         
-        // Verificar el tipo de contenido de la respuesta
         const contentType = response.headers.get('content-type');
         
         if (!contentType || !contentType.includes('application/json')) {
-            // El servidor devolvió HTML en lugar de JSON (probablemente un error 500)
             const text = await response.text();
             console.error('Respuesta del servidor (HTML):', text);
             throw new Error('El servidor devolvió un error. Verifica los logs de Render.');
@@ -131,7 +121,6 @@ async function processDataset() {
 }
 
 function displayResults(data) {
-    // Update stats
     document.getElementById('statOriginal').textContent = data.stats.original.toLocaleString();
     document.getElementById('statTrain').textContent = data.stats.train.toLocaleString();
     document.getElementById('statVal').textContent = data.stats.validation.toLocaleString();
@@ -141,16 +130,7 @@ function displayResults(data) {
     document.getElementById('statValPct').textContent = data.stats.val_pct;
     document.getElementById('statTestPct').textContent = data.stats.test_pct;
     
-    // Update plots
-    document.getElementById('plotOriginal').src = 'data:image/png;base64,' + data.plots.original;
-    document.getElementById('plotTrain').src = 'data:image/png;base64,' + data.plots.train;
-    document.getElementById('plotVal').src = 'data:image/png;base64,' + data.plots.val;
-    document.getElementById('plotTest').src = 'data:image/png;base64,' + data.plots.test;
-    
-    // Show results
     resultsSection.classList.remove('hidden');
-    
-    // Scroll to results
     resultsSection.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -181,7 +161,6 @@ function getCookie(name) {
         }
     }
     
-    // Si no hay cookie, intentar obtener del token en el DOM
     if (!cookieValue) {
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
         if (csrfToken) {
@@ -190,4 +169,4 @@ function getCookie(name) {
     }
     
     return cookieValue;
-}
+}       
