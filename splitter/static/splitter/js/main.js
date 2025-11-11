@@ -102,6 +102,16 @@ async function processDataset() {
             }
         });
         
+        // Verificar el tipo de contenido de la respuesta
+        const contentType = response.headers.get('content-type');
+        
+        if (!contentType || !contentType.includes('application/json')) {
+            // El servidor devolvió HTML en lugar de JSON (probablemente un error 500)
+            const text = await response.text();
+            console.error('Respuesta del servidor (HTML):', text);
+            throw new Error('El servidor devolvió un error. Verifica los logs de Render.');
+        }
+        
         const data = await response.json();
         
         if (response.ok && data.success) {
@@ -111,6 +121,7 @@ async function processDataset() {
             throw new Error(data.error || 'Error desconocido');
         }
     } catch (err) {
+        console.error('Error completo:', err);
         showError('Error al procesar el archivo: ' + err.message);
         configSection.classList.remove('hidden');
     } finally {
