@@ -6,8 +6,15 @@ import os
 
 # Configuración crítica de Matplotlib ANTES de importarlo
 os.environ['MPLCONFIGDIR'] = '/tmp/matplotlib'
+os.environ['MPLBACKEND'] = 'Agg'
+
 import matplotlib
 matplotlib.use('Agg')  # Backend sin GUI
+
+# Deshabilitar construcción de cache de fuentes (crítico para Render)
+import matplotlib.font_manager
+matplotlib.font_manager._load_fontmanager(try_read_cache=False)
+
 import matplotlib.pyplot as plt
 
 import io
@@ -105,6 +112,8 @@ def split_dataset(request):
             return JsonResponse({'error': 'El archivo debe ser .arff'}, status=400)
         
         try:
+            # Asegurar que el directorio de matplotlib existe
+            os.makedirs('/tmp/matplotlib', exist_ok=True)
             # Read and parse ARFF file
             content = uploaded_file.read().decode('utf-8')
             df = load_arff_file(content)
