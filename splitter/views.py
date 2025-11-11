@@ -2,14 +2,18 @@ from django.shortcuts import render
 from django.http import JsonResponse, FileResponse
 from sklearn.model_selection import train_test_split
 import pandas as pd
+import os
+
+# Configuración crítica de Matplotlib ANTES de importarlo
+os.environ['MPLCONFIGDIR'] = '/tmp/matplotlib'
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg')  # Backend sin GUI
 import matplotlib.pyplot as plt
+
 import io
 import base64
 import arff
 import zipfile
-import os
 from pathlib import Path
 
 def index(request):
